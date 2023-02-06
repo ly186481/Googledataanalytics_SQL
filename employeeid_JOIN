@@ -45,3 +45,61 @@ FULL OUTER JOIN
  `employee_data.departments`
  ON
  employees.deparment_id = departments.department_id
+
+
+
+//
+-- General JOIN sytax
+SELECT
+--table columns from tables are inserted here
+  table_name1.column_name
+  table_name2.column_name
+ FROM
+  table_name1
+ JOIN
+  table_name2
+ ON table_name1.column_name = table_name2.column_name
+ 
+-- INNER JOIN
+SELECT
+  customers.customer_name,
+  orders.product_id,
+  orders.ship_date
+ FROM
+  customers
+ INNER JIN
+  orders
+ ON customers.customer_id = orders.customer_id
+ 
+ --LEFT JOIN
+ SELECT
+  customers.customer_name,
+  sales.sales_rep
+ FROM
+  customers
+ LEFT JOIN
+  sales
+ ON customers.customer_id = sales.customer_id
+ 
+ --RIGHT JOIN
+ SELECT
+  sales.sales_rep,
+  customers.customer_name
+ FROM
+  sales
+ RIGHT JOIN
+  customers
+ ON sales.customer_id = customers.customer_id
+ 
+ --FULL OUTER JOIN
+ SELECT
+  customers.customer_name,
+  orders.ship_date
+ FROM
+  customers
+ FULL OUTER JOIN
+  orders
+ ON customers.customer_id = orders.customer_id
+ 
+ 
+ 
