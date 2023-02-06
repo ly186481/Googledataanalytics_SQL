@@ -43,3 +43,6 @@ FROM
       usertype = 
       'Subscriber'
     )
+    
+    
+    --ON,IN,ANY,ALL
