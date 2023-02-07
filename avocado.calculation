@@ -1,0 +1,23 @@
+SELECT
+  Date,
+  Region,
+  Small_Bags,
+  Large_Bags,
+  XLarge_Bags,
+  Total_Bags,
+  Small_Bags+Large_Bags+XLarge_Bags AS Total_Bags_Calc
+FROM `avocado.avocado_data`
+
+-- what percent of the total number of bags were small bags. Finding this out might help stakeholders make decisions on how to package avocados or which size bag to run a sale on. 
+
+SELECT
+  Date,
+  Region,
+  Total_Bags,
+  Small_Bags,
+  (Small_Bags/Total_Bags)*100 AS Small_Bags_Percent
+FROM
+  `avocado.avocado_data`
+WHERE
+  Total_Bags <> 0
+  -- or put != instead of <>
