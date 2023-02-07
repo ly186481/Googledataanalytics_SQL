@@ -24,3 +24,22 @@ GROUP BY
   year
 ORDER BY
   year
+
+--The WITH clause is a type of temporary table that you can query from multiple times
+WITH trips_over_1_hr AS (
+    SELECT *
+    FROM
+      bigquery-public-data.new_york.citibike_trips
+    WHERE
+      tripduration >= 60
+
+)
+
+## Count how many trips are 60+ minutes long
+
+SELECT
+  COUNT(*) AS cnt
+FROM
+  trips_over_1_hr
+##show total number of biketrips from the dataset that lasted 60 minutes or longer
+
