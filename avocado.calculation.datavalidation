@@ -21,3 +21,23 @@ FROM
 WHERE
   Total_Bags <> 0
   -- or put != instead of <>
+
+--Data validation process
+--No display means data is accurate
+
+SELECT *
+FROM
+  `avocado.avocado_data`
+WHERE
+  Total_Bags != Total_Bags
+
+SELECT
+  Date,
+  Region,
+  Total_Bags,
+  Small_Bags,
+  (Small_Bags/Total_Bags)*100 AS Small_Bags_Percent
+FROM
+ `avocado.avocado_data`
+WHERE
+  Total_Bags != Total_Bags
