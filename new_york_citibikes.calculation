@@ -12,3 +12,15 @@ GROUP BY
 ORDER BY
   num_trips DESC
 LIMIT 10
+
+--Calculation with other statements
+
+SELECT
+  EXTRACT(YEAR FROM STARTTIME) AS year,
+  COUNT(*) AS number_of_rides
+FROM
+  bigquery-public-data.new_york.citibike_trips
+GROUP BY
+  year
+ORDER BY
+  year
