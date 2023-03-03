@@ -117,3 +117,58 @@ GROUP BY DEP_ID
 HAVING COUNT(*) < 4
 ORDER BY AVG_SALARY;
 
+#Accesssing Multiple Tables with Sub-Queries
+#Retrieve only the EMPLOYEES records that correspond to jobs in the JOBS table
+SELECT*
+FROM HR.JOBS;
+
+SELECT*
+FROM HR.EMPLOYEES
+WHERE JOB_ID IN (SELECT JOB_IDENT FROM HR.JOBS);
+
+#Retrieve only the list of employees whose JOB_TITLE is Jr.Designer.
+SELECT *
+FROM HR.EMPLOYEES
+WHERE JOB_ID IN (SELECT JOB_IDENT FROM HR.JOBS WHERE JOB_TITLE = 'Jr. Designer');
+
+#Retrieve JOB information and who earn more than $70,000.
+SELECT JOB_TITLE, MIN_SALARY, MAX_SALARY, JOB_IDENT
+FROM HR.JOBS
+WHERE JOB_IDENT IN (SELECT JOB_ID FROM HR.EMPLOYEES WHERE SALARY > 70000);
+
+#Retrieve JOB information and whose birth year is after 1976
+SELECT JOB_TITLE, MIN_SALARY, MAX_SALARY, JOB_IDENT
+FROM HR.JOBS
+WHERE JOB_IDENT IN (SELECT JOB_ID FROM HR.EMPLOYEES WHERE YEAR(B_DATE)>1976 );
+
+#Retrieve JOB information for female employees whose birth year is after 1976
+SELECT JOB_TITLE, MIN_SALARY, MAX_SALARY, JOB_IDENT
+FROM HR.JOBS
+WHERE JOB_IDENT IN (SELECT JOB_ID FROM HR.EMPLOYEES WHERE YEAR(B_DATE) >1976 AND SEX = 'F');
+
+#EXERCISE 2 : ACCESSING MULTIPLE TABLES WITH INPLICIT JOINS
+#Perform an implicit catesian/cross join between EMPLOYEES and JOBS table
+SELECT *
+FROM HR.EMPLOYEES, HR.JOBS;
+
+#Retrieve only the EMPLOYEES records that correspond to jobs in the JOBS table
+SELECT *
+FROM HR.EMPLOYEES, HR.JOBS
+WHERE EMPLOYEES.JOB_ID = JOBS.JOB_IDENT;
+
+#Redo the previous query, using shorter aliases for table names
+SELECT *
+FROM HR.EMPLOYEES E, HR.JOBS J
+WHERE E.JOB_ID = J.JOB_IDENT;
+
+#Redo the previous query, but retrieve inly the Employee ID, Employee Name and Job Title
+SELECT EMP_ID, F_NAME, L_NAME, JOB_TITLE
+FROM HR.EMPLOYEES E, HR.JOBS J
+WHERE E.JOB_ID = J.JOB_IDENT;
+
+#Redo the previous query, but specify the fully qualified columns names with aliases in the 
+#SELECT clause
+SELECT E.EMP_ID, E.F_NAME, E.L_NAME, J.JOB_TITLE
+FROM HR.EMPLOYEES E, HR.JOBS J
+WHERE E.JOB_ID = J.JOB_IDENT;
+
